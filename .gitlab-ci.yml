@@ -1,0 +1,16 @@
+image: maven
+
+variables:
+  DOCKER_REGISTRY: "docker-registry.iyoukeji.com"
+
+stages:
+  - package
+
+package:
+  image: gitlab/dind:latest
+  stage: package
+  script:
+    - chmod +x .gitlab-ci/package-docker.sh && .gitlab-ci/package-docker.sh
+  only:
+    - /^release.*$/
+    - tags
